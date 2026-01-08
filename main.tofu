@@ -2,7 +2,6 @@ locals {
   vcn_cidr               = var.vcn_cidr
   nodes_subnet_cidr      = var.nodes_subnet_cidr
   endpoint_subnet_cidr   = var.endpoint_subnet_cidr
-  service_lb_subnet_cidr = var.service_lb_subnet_cidr
 }
 
 data "oci_identity_availability_domains" "ads" {
@@ -59,6 +58,15 @@ resource "oci_core_security_list" "public" {
   }
 
   ingress_security_rules {
+    protocol = "6"
+    source   = var.admin_cidr
+    tcp_options {
+      min = var.nodeport_min
+      max = var.nodeport_max
+    }
+  }
+
+  ingress_security_rules {
     protocol = "1"
     source   = local.vcn_cidr
   }
@@ -98,18 +106,6 @@ resource "oci_core_subnet" "endpoint" {
   prohibit_public_ip_on_vnic = false
 }
 
-resource "oci_core_subnet" "service_lb" {
-  compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.main.id
-  cidr_block     = local.service_lb_subnet_cidr
-  display_name   = "${var.cluster_name}-service-lb-subnet"
-  dns_label      = "lb"
-
-  route_table_id             = oci_core_route_table.public.id
-  security_list_ids          = [oci_core_security_list.public.id]
-  prohibit_public_ip_on_vnic = false
-}
-
 data "oci_containerengine_cluster_option" "oke" {
   cluster_option_id = "all"
 }
@@ -126,7 +122,6 @@ resource "oci_containerengine_cluster" "oke" {
   }
 
   options {
-    service_lb_subnet_ids = [oci_core_subnet.service_lb.id]
     kubernetes_network_config {
       pods_cidr     = var.pods_cidr
       services_cidr = var.services_cidr

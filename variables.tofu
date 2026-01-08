@@ -54,12 +54,6 @@ variable "endpoint_subnet_cidr" {
   default     = "10.0.20.0/24"
 }
 
-variable "service_lb_subnet_cidr" {
-  description = "Service load balancer subnet CIDR"
-  type        = string
-  default     = "10.0.30.0/24"
-}
-
 variable "pods_cidr" {
   description = "Kubernetes pod CIDR"
   type        = string
@@ -111,4 +105,16 @@ variable "admin_cidr" {
   description = "CIDR allowed to SSH to nodes and reach the public API endpoint"
   type        = string
   default     = "0.0.0.0/0"
+}
+
+variable "nodeport_min" {
+  description = "Minimum NodePort range to allow from admin_cidr"
+  type        = number
+  default     = 30000
+}
+
+variable "nodeport_max" {
+  description = "Maximum NodePort range to allow from admin_cidr"
+  type        = number
+  default     = 32767
 }
