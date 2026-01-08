@@ -17,7 +17,3 @@ output "nodes_subnet_id" {
 output "endpoint_subnet_id" {
   value = oci_core_subnet.endpoint.id
 }
-
-output "service_lb_subnet_id" {
-  value = oci_core_subnet.service_lb.id
-}
