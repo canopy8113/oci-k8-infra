@@ -19,12 +19,6 @@ variable "private_key" {
   sensitive   = true
 }
 
-variable "private_key_passphrase" {
-  description = "Passphrase for the private API key (if set)"
-  type        = string
-  sensitive   = true
-  default     = ""
-}
 
 variable "region" {
   description = "OCI region"
