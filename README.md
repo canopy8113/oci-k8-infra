@@ -23,6 +23,7 @@ This repo provisions a small Oracle Kubernetes Engine (OKE) cluster using OpenTo
    - `user_ocid`
    - `fingerprint`
    - `private_key` (mark as secret)
+   - `private_key_passphrase` (mark as secret if set)
    - `region`
    - `compartment_ocid`
    - `node_image_id`
