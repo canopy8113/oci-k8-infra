@@ -69,13 +69,13 @@ variable "services_cidr" {
 variable "kubernetes_version" {
   description = "Optional fixed Kubernetes version; leave empty to use latest available"
   type        = string
-  default     = ""
+  default     = "1.34.1"
 }
 
 variable "node_pool_size" {
   description = "Number of worker nodes"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "node_shape" {
@@ -99,6 +99,7 @@ variable "node_memory_in_gbs" {
 variable "node_image_id" {
   description = "OKE node image OCID"
   type        = string
+  default     = "ocid1.image.oc1.uk-london-1.aaaaaaaascvgl22f563ata6tumzoqrdpos2xezvvjal5towzipl6g3utun7q"
 }
 
 variable "admin_cidr" {
