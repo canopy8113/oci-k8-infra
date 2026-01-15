@@ -70,7 +70,7 @@ variable "services_cidr" {
 variable "kubernetes_version" {
   description = "Optional fixed Kubernetes version; leave empty to use latest available"
   type        = string
-  default     = "1.34.1"
+  default     = "v1.34.1"
 }
 
 variable "node_pool_size" {
