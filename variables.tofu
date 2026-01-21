@@ -106,7 +106,7 @@ variable "node_image_id" {
 variable "admin_cidr" {
   description = "CIDR allowed to SSH to nodes and reach the public API endpoint"
   type        = string
-  default     = "0.0.0.0/0"
+  default     = "213.109.151.46/32"
 }
 
 variable "nodeport_min" {
