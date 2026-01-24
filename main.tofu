@@ -50,7 +50,7 @@ resource "oci_core_security_list" "public" {
 
   ingress_security_rules {
     protocol = "6"
-    source   = "0.0.0.0/0"
+    source   = var.admin_cidr
     tcp_options {
       min = 6443
       max = 6443
